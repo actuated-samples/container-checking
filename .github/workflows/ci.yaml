@@ -11,6 +11,10 @@ on:
   workflow_dispatch:
 
 jobs:
+  # Even if all core components are met in the Kernel/system, the job still fails with a non-zero
+  # exit code.
+
+  # Issue on moby repo : https://github.com/moby/moby/issues/49972
   docker:
     name: check-docker
     runs-on: [actuated-2cpu-6gb, n100]
@@ -52,4 +56,4 @@ jobs:
 
       - name: Check the Kernel config
         run: |
-          $HOME/.arkade/bin/k3s check-config
+          sudo -E $HOME/.arkade/bin/k3s check-config
