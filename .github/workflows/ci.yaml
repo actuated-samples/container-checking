@@ -15,6 +15,10 @@ jobs:
     name: check-docker
     runs-on: [actuated-2cpu-6gb, n100]
 
+    concurrency: 
+      group: ${{ github.ref }}-docker
+      cancel-in-progress: true
+
     steps:
       - uses: actions/checkout@v4
       - name: Setup mirror
@@ -32,6 +36,9 @@ jobs:
   k3s:
     name: check-k3s
     runs-on: [actuated-2cpu-6gb, n100]
+    concurrency: 
+      group: ${{ github.ref }}-k3s
+      cancel-in-progress: true
 
     steps:
       - uses: actions/checkout@v4
@@ -45,4 +52,4 @@ jobs:
 
       - name: Check the Kernel config
         run: |
-          sudo -E $HOME/.arkade/bin/k3s check-config
+          $HOME/.arkade/bin/k3s check-config
