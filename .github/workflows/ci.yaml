@@ -48,7 +48,7 @@ jobs:
       - uses: alexellis/arkade-get@master
         with:
           print-summary: false
-          k3sup: latest
+          k3s: latest
 
       - name: Check the Kernel config
         run: |
